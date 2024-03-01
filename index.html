@@ -72,6 +72,8 @@
             left: 58%;
             fill: white;
             width: 12%;
+        }
+        .talking{
             animation: talking 0.3s infinite alternate;
         }
         @keyframes talking{
@@ -94,7 +96,7 @@
             transition: box-shadow 0.3s;
         }
         #mic-button:hover{
-            box-shadow: 0 0 12px 6px #f0f, 0 0 20px 12px #0ff, 0 0 28px 18px #fff;
+            box-shadow: 0 0 28px 18px #fff;
         }
         .listening{
             animation: listening 1s infinite alternate;
@@ -130,9 +132,40 @@
 <script src="jquery-3.7.1.min.js"></script>
 <script>
     $(document).ready(function(){
+        const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+        recognition.lang = "en-US";
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        function speak(text) {
+            $("#lip").addClass("talking");
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = "en-US";
+            utterance.onend = function() {
+                $("#lip").removeClass("talking");
+            };
+            speechSynthesis.speak(utterance);
+        }
+
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            console.log(transcript);
+            $("#mic-button").removeClass("listening");
+            speak(transcript);
+        };
+
+        recognition.onerror = function(event) {
+            $("#mic-button").removeClass("listening");
+        };
+
+        function commute(){
+            $("#mic-button").addClass("listening");
+            recognition.start();
+        }
+
         $("#mic-button").click(function(){
-            $(this).addClass("listening")
-        })
+            commute();
+        });
     })
 </script>
 </html>
