@@ -5,20 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>ABOUT - Madhav</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        *{
-            box-sizing: border-box;
-        }
-        :root{
-            font-family: sans-serif;
-            line-height: 1.6;
-            font-size: 16px;
-            color: white;
-        }
         h2{
             font-size: 1.5em;
         }
-        .credits-ul{
+        .credits-ul,.project-ul{
             list-style: none;
             padding-left: 0;
         }
@@ -29,6 +21,10 @@
         .credits-ul>li:nth-child(2n){
             margin-bottom: 2em;
             font-size: 1.2em;
+        }
+        .project-ul>li:nth-child(2n-1){
+            margin-top: 1.5em;
+            font-style: italic;
         }
         .sudarshan-img{
             display: block;
@@ -47,21 +43,40 @@
         }
     </style>
 </head>
-<body style="display:flex;flex-direction:column;margin:0;min-height:100vh;background:url(background.webp) center/cover no-repeat fixed">
-    <header style="display:flex;padding:20px;">
-        <a href="/" style="margin-left:auto;color:white;text-decoration:none">BACK TO MADHAAV</a>
+<body>
+    <header>
+        <ul class="header-ul">
+            <li><a href="/">MADHAV</a></li>
+            <li><a href="analys.html">ANALYZE</a></li>
+            <li><a href="news.html">NEWS</a></li>
+            <li><a href="game.html">GAME</a></li>
+            <li><a href="about.html">ABOUT US</a></li>
+        </ul>
     </header>
-    <main style="flex-grow:1;position:relative;overflow-y:hidden">
+    <main style="flex-grow:1;overflow-y:hidden">
         <article style="padding:20px;text-align:center">
             <h1 style="font-size:2em">ABOUT</h1>
-            <p style="margin-bottom:3em;">Madhav is </p>
+            <p style="margin-bottom:3em;">Madhav is a voice assistant leveraging NLP, deep learning, ML to measure and address depression using wisdom from Shreemad Bhagavad Geeta.<p>
+            <ul class="project-ul">
+                <li>OUR MISSION</li>
+                <li>Providing accessible mental health support through technology and ancient wisdom.</li>
+                <li>TECHNOLOGY</li>
+                <li>NLP, Deep Learning, Full Stack Web-D, Graphic Designing</li>
+                <li>EXPERIENCE</li>
+                <li>Offering empathetic and personalized support for mental well-being.</li>
+                <li>WISDOM & SOLUTIONS</li>
+                <li>Integrating ancient wisdom with contemporary technology for holistic well-being.</li>
+                <li>COMMITMENTS</li>
+                <li>Ethical and responsible approach to addressing mental health challenges.</li>
+            </ul>
+            <p>This concise summary effectively communicates Madhav's purpose, technology expertise, and commitment to leveraging technology for mental health advocacy. If you have any further adjustments or additional details to include, feel free to share your preferences.</p>
             <h2>THE TEAM</h2>
             <ul class="credits-ul">
-                <li>Natural Language Processing | Back-End</li>
-                <li>ASHISH</li>
-                <li>Frontend | Graphics</li>
+                <li>ARTIFICIAL INTELLIGENCE | MACHIE LEARNING</li>
+                <li>ASHISH KUMAR</li>
+                <li>APIs | FRONT-END | GRAPHICS | CONNECTOR</li>
                 <li>ARYAYAN ROY</li>
-                <li>APIs | Back-End Connector</li>
+                <li>APIs | GAME</li>
                 <li>ASHUTOSH KUMAR</li>
             </ul>
         </article>
