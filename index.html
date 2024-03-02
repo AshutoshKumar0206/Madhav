@@ -94,6 +94,7 @@
             filter: drop-shadow(0 0 10px white);
             cursor: pointer;
             transition: all 0.3s;
+            backdrop-filter: blur(10px);
         }
         #mic-button:hover{
             box-shadow: 0 0 14px 9px #fff;
@@ -120,6 +121,79 @@
                 transform: scale(1.2);
             }
         }
+        
+
+        /*miscellaneous*/
+        #search-box{
+            position: fixed;
+            z-index: 3;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            max-width: 600px;
+            max-height: 100%;
+            overflow-y: auto;
+            backdrop-filter: blur(25px);
+            border-radius: 25px;
+            box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        .search-active{
+            animation: search 2s normal forwards;
+        }
+
+        @keyframes search{
+            to{
+                width: 100%;
+                padding: 10px;
+            }
+        }
+
+        .search-field{
+            padding: 10px;
+            text-overflow: ellipsis;
+            overflow-x: hidden;
+            text-wrap: nowrap;
+        }
+        #search-term{
+            margin-left: 0.4em;
+            font-size: 20px;
+            font-style: italic;
+        }
+        #search-result{
+            margin-bottom: 0;
+            padding: 10px;
+        }
+        #search-ul{
+            padding-left: 0;
+            margin-bottom: 0;
+            list-style: none;
+        }
+        #search-ul>li{
+            display: flex;
+            align-items:center;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: box-shadow 0.3s;
+        }
+        #search-ul>li:hover{
+            backdrop-filter: blur(5px);
+            box-shadow: 3px 3px 9px rgba(0, 0, 0, 0.3);
+        }
+        .index{
+            margin-right: 15px;
+            padding: 10px 15px;
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+        }
+        .result{
+            flex-grow: 1;
+            text-overflow: ellipsis;
+            overflow-x: hidden;
+            text-wrap: nowrap;
+        }
     </style>
 </head>
 <body style="margin:0;height:100vh;background:url(background.webp) center/cover no-repeat fixed">
@@ -135,15 +209,37 @@
             </div>
         </article>
         <button type="button" id="mic-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#fff" width="40"><path d="M480-400q-50 0-85-35t-35-85v-240q0-50 35-85t85-35q50 0 85 35t35 85v240q0 50-35 85t-85 35Zm0-240Zm-40 520v-123q-104-14-172-93t-68-184h80q0 83 58.5 141.5T480-320q83 0 141.5-58.5T680-520h80q0 105-68 184t-172 93v123h-80Zm40-360q17 0 28.5-11.5T520-520v-240q0-17-11.5-28.5T480-800q-17 0-28.5 11.5T440-760v240q0 17 11.5 28.5T480-480Z"/></svg></button>
+        <div id="search-box">
+            <div class="search-field"><span>Searching for</span><span id="search-term"></span></div>
+            <ul id="search-ul">
+            </ul>
+            <p id="search-result"></p>
+        </div>
     </main>
 </body>
 <script src="jquery-3.7.1.min.js"></script>
 <script>
     $(document).ready(function(){
-        const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
-        recognition.lang = "en-US";
-        recognition.interimResults = false;
-        recognition.maxAlternatives = 1;
+
+        function listening(callback) {
+            var recognition = new webkitSpeechRecognition() || new SpeechRecognition();;
+            recognition.lang = "en-US";
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+            recognition.start();
+            $("#mic-button").addClass("listening");
+
+            recognition.onresult = function(event) {
+                $("#mic-button").removeClass("listening");
+                var transcript = event.results[0][0].transcript;
+                callback(transcript);
+            }
+
+            recognition.onerror = function(event) {
+                $("#mic-button").removeClass("listening");
+                console.error("Speech recognition error:", event.error);
+            };
+        }
 
         function speak(text) {
             $("#lip").addClass("talking");
@@ -155,28 +251,34 @@
             speechSynthesis.speak(utterance);
         }
 
-        
-
         recognition.onerror = function(event) {
             $("#mic-button").removeClass("listening");
         };
 
-
         $("#mic-button").click(function(){
             
             $("#mic-button").addClass("listening");
+            
             recognition.start();
-
+            
             recognition.onresult = function(event) {
                 const transcript = event.results[0][0].transcript;
                 $("#mic-button").removeClass("listening");
                 const searches = transcript.toLowerCase().split(" ").slice(0, 3).join(" ");
                 if (searches.includes("search")){
-                    alert("Search")
+                    $("#search-box").addClass("search-active");
+                    $("#mic-button").addClass("listening");
+                    recognition.start();
+                    recognition.onresult = function(event) {
+                        console.log()
+                        const search = event.results[0][0].transcript;
+                        $("#search-term").html(search)
+                        $("#mic-button").removeClass("listening");
+                    }
                 }else{
                     $.post({
                         url: "http://localhost:5000/process_transcript",
-                        data: { transcript: transcript },
+                        data: {transcript: transcript},
                         dataType: "text"
                     }).done(function(response) {
                         speak(response)
