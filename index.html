@@ -159,7 +159,12 @@
             const transcript = event.results[0][0].transcript;
             console.log(transcript);
             $("#mic-button").removeClass("listening");
-            speak(transcript);
+            const searches = transcript.toLowerCase().split(" ").slice(0, 3).join(" ");
+            if (searches.includes("search")){
+                alert("Search")
+            }else{
+                speak(transcript);
+            }
         };
 
         recognition.onerror = function(event) {
@@ -174,6 +179,7 @@
         //Ashutosh yahan neeche code krna. Nhi toh gaand maar dunga
         $("#mic-button").click(function(){
             commute();
+
 
             
             $.post({
