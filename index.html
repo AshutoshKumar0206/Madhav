@@ -155,39 +155,35 @@
             speechSynthesis.speak(utterance);
         }
 
-        recognition.onresult = function(event) {
-            const transcript = event.results[0][0].transcript;
-            console.log(transcript);
-            $("#mic-button").removeClass("listening");
-            const searches = transcript.toLowerCase().split(" ").slice(0, 3).join(" ");
-            if (searches.includes("search")){
-                alert("Search")
-            }else{
-                speak(transcript);
-            }
-        };
+        
 
         recognition.onerror = function(event) {
             $("#mic-button").removeClass("listening");
         };
 
-        function commute(){
+
+        $("#mic-button").click(function(){
+            
             $("#mic-button").addClass("listening");
             recognition.start();
-        }
 
-        //Ashutosh yahan neeche code krna. Nhi toh gaand maar dunga
-        $("#mic-button").click(function(){
-            commute();
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                $("#mic-button").removeClass("listening");
+                const searches = transcript.toLowerCase().split(" ").slice(0, 3).join(" ");
+                if (searches.includes("search")){
+                    alert("Search")
+                }else{
+                    $.post({
+                        url: "http://localhost:5000/process_transcript",
+                        data: { transcript: transcript },
+                        dataType: "text"
+                    }).done(function(response) {
+                        speak(response)
+                    });
+                }
+            };
 
-
-            
-            $.post({
-                url: "",
-                data: {transcript: transcript}
-            }).done(function(e){
-                console.log(e);
-            })
         });
 
     })
