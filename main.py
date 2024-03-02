@@ -6,7 +6,7 @@ CORS(app)
 
 @app.route('/process_transcript', methods=['POST'])
 def process_transcript():
-    transcript = "Your request is"+request.form['transcript']
+    transcript = request.form['transcript']
     return transcript
 
 if __name__ == '__main__':
