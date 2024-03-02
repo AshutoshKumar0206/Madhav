@@ -93,10 +93,15 @@
             border-radius: 50%;
             filter: drop-shadow(0 0 10px white);
             cursor: pointer;
-            transition: box-shadow 0.3s;
+            transition: all 0.3s;
         }
         #mic-button:hover{
-            box-shadow: 0 0 28px 18px #fff;
+            box-shadow: 0 0 14px 9px #fff;
+            transform: scale(1.1);
+        }
+        #mic-button:active{
+            box-shadow: 0 0 14px 9px #fff;
+            transform: scale(0.9);
         }
         .listening{
             animation: listening 1s infinite alternate;
@@ -104,12 +109,15 @@
         @keyframes listening{
             0%{
                 box-shadow: 0 0 12px 6px #fff, 0 0 20px 12px #f0f, 0 0 28px 18px #0ff;
+                transform: scale(1);
             }
             50%{
                 box-shadow: 0 0 12px 6px #f0f, 0 0 20px 12px #0ff, 0 0 28px 18px #fff;
+                transform: scale(0.9);
             }
             100%{
                 box-shadow: 0 0 12px 6px #0ff, 0 0 20px 12px #fff, 0 0 28px 18px #f0f;
+                transform: scale(1.2);
             }
         }
     </style>
@@ -170,7 +178,7 @@
             
             $.post({
                 url: "",
-                data: {transcript: "Hello Ashutosh! I am Anchal."}
+                data: {transcript: transcript}
             }).done(function(e){
                 console.log(e);
             })

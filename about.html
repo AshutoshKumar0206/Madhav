@@ -30,13 +30,28 @@
             margin-bottom: 2em;
             font-size: 1.2em;
         }
+        .sudarshan-img{
+            display: block;
+            z-index: -1;
+            position: absolute;
+            width: 500px;
+            transform: translate(-50%, -50%) rotate(0deg);
+            bottom: -500px;
+            left: 50%;
+            animation: rotate 10s infinite linear;
+        }
+        @keyframes rotate{
+            100%{
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
     </style>
 </head>
 <body style="display:flex;flex-direction:column;margin:0;min-height:100vh;background:url(background.webp) center/cover no-repeat fixed">
     <header style="display:flex;padding:20px;">
         <a href="/" style="margin-left:auto;color:white;text-decoration:none">BACK TO MADHAAV</a>
     </header>
-    <main style="flex-grow:1">
+    <main style="flex-grow:1;position:relative;overflow-y:hidden">
         <article style="padding:20px;text-align:center">
             <h1 style="font-size:2em">ABOUT</h1>
             <p style="margin-bottom:3em;">Madhav is </p>
@@ -50,6 +65,7 @@
                 <li>ASHUTOSH KUMAR</li>
             </ul>
         </article>
+        <img src="sudarshan.webp" alt="Sudarshan Chakra" class="sudarshan-img">
     </main>
 </body>
 </html>
