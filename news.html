@@ -17,9 +17,20 @@
         }
         #articles-ul a{
             display: flex;
+            padding: 20px;
+            border-radius: 30px;
             align-items: flex-start;
             text-decoration: none;
             color: white;
+            transition: all 0.3s;
+        }
+        #articles-ul a:hover{
+            backdrop-filter: blur(20px);
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        #articles-ul a:hover>img{
+            
+            box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
         }
         #articles-ul>li:not(:last-child){
             margin-bottom: 30px;
@@ -31,15 +42,53 @@
             width: 100%;
             max-width: 400px;
             aspect-ratio: 4/3;
+            object-fit: cover;
             overflow: hidden;
             border-radius: 20px;
             flex-shrink: 0;
+            transition: all 0.6s;
         }
         .info{
             flex-grow: 1;
         }
         h1{
             margin-top: 0;
+        }
+
+        @media only screen and (min-width: 600px) {
+            #articles-ul>li:nth-child(2n-1) .info{
+                margin-left: 20px;
+            }
+            #articles-ul>li:nth-child(2n) .info{
+                margin-right: 20px;
+            }
+        }
+        @media only screen and (max-width: 600px) {
+            #articles-ul a{
+                flex-direction: column !important;
+            }
+            img{
+                max-width: 100%;
+            }
+        }
+        .news-ul{
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        .news-ul>li:not(:last-child){
+            margin-bottom: 1em;
+        }
+        .title{
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .auth{
+            font-style: italic;
+        }
+        .auth::before{
+            content: "~";
         }
     </style>
 </head>
@@ -60,8 +109,12 @@
                     <a href="">
                         <img src="" alt="">
                         <div class="info">
-                            <h1></h1>
-                            <p></p>
+                            <ul class="news-ul">
+                                <li class="title"></li>
+                                <li class="des"></li>
+                                <li class="auth"></li>
+                                <li class="date"></li>
+                            </ul>
                         </div>
                     </a>
                 </li>
@@ -79,11 +132,14 @@
             articles.empty();
             if(data.status == "ok"){
                 $.each(data.articles, function(i, article){
+                    console.log(article)
                     row = li.clone();
                     row.find("a").attr("href", article.url);
                     row.find("img").attr("src", article.urlToImage);
-                    row.find("h1").html(article.title);
-                    row.find("p").html(article.description);
+                    row.find(".title").html(article.title);
+                    row.find(".des").html(article.description);
+                    row.find(".auth").html(article.author);
+                    row.find(".date").html(article.publishedAt);
                     articles.append(row);
                 });
             }else{
