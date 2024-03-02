@@ -7,7 +7,40 @@
     <title>NEWS - Madhav</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        
+        article{
+            padding: 20px;
+        }
+        #articles-ul{
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+        #articles-ul a{
+            display: flex;
+            align-items: flex-start;
+            text-decoration: none;
+            color: white;
+        }
+        #articles-ul>li:not(:last-child){
+            margin-bottom: 30px;
+        }
+        #articles-ul>li:nth-child(2n)>a{
+            flex-direction: row-reverse;
+        }
+        img{
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            border-radius: 20px;
+            flex-shrink: 0;
+        }
+        .info{
+            flex-grow: 1;
+        }
+        h1{
+            margin-top: 0;
+        }
     </style>
 </head>
 <body>
@@ -21,7 +54,42 @@
         </ul>
     </header>
     <main style="flex-grow:1">
-    </article>
+        <article>
+            <ul id="articles-ul">
+                <li>
+                    <a href="">
+                        <img src="" alt="">
+                        <div class="info">
+                            <h1></h1>
+                            <p></p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </article>
     </main>
 </body>
+<script src="jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+        var url = "https://newsapi.org/v2/everything?q=depression&apiKey=7fa5cddcf74d45e0826c93ac4b5009d8";
+        $.get(url, function(data){
+            var articles = $("#articles-ul");
+            var li = articles.find("li").first();
+            articles.empty();
+            if(data.status == "ok"){
+                $.each(data.articles, function(i, article){
+                    row = li.clone();
+                    row.find("a").attr("href", article.url);
+                    row.find("img").attr("src", article.urlToImage);
+                    row.find("h1").html(article.title);
+                    row.find("p").html(article.description);
+                    articles.append(row);
+                });
+            }else{
+                alert("Couldn't connect to server")
+            }
+        })
+    })
+</script>
 </html>

@@ -187,7 +187,6 @@
             overflow-x: hidden;
             text-wrap: nowrap;
         }
-        
     </style>
 </head>
 <body>
@@ -300,7 +299,7 @@
                                 })
 
                                 listening(function(transcript) {
-                                    page = $("#search-ul>li").eq(transcript).data("page");
+                                    page = $("#search-ul>li").eq(parseInt(transcript) - 1).data("page");
                                     search(page);
                                 })
                             },
