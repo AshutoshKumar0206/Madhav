@@ -132,7 +132,6 @@
             articles.empty();
             if(data.status == "ok"){
                 $.each(data.articles, function(i, article){
-                    console.log(article)
                     row = li.clone();
                     row.find("a").attr("href", article.url);
                     row.find("img").attr("src", article.urlToImage);
