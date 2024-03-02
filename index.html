@@ -163,9 +163,19 @@
             recognition.start();
         }
 
+        //Ashutosh yahan neeche code krna. Nhi toh gaand maar dunga
         $("#mic-button").click(function(){
             commute();
+
+            
+            $.post({
+                url: "",
+                data: {transcript: "Hello Ashutosh! I am Anchal."}
+            }).done(function(e){
+                console.log(e);
+            })
         });
+
     })
 </script>
 </html>
