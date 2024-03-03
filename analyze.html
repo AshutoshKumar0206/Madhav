@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>ANALYZE - Madhav</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        article{
+            padding: 20px;   
+        }
+        #input-field{
+            margin-top: 10px;
+            padding:20px;
+            width:100%;
+            resize:none;
+            background:transparent;
+            backdrop-filter:
+            blur(10px);
+            color:white;
+            border-radius:20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+        }
+        #input-field:focus{
+            transform: scale(1.1);
+        }
+        #submit-btn{
+            display: block;
+            margin-left: auto;
+            padding: 10px 30px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            cursor: pointer;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+        }
+        #submit-btn:hover{
+            transform: scale(1.1);
+        }
+        .progress-bar{
+            position: relative;
+            margin: 30px auto;
+            height:50px;
+            max-width: 600px;
+            border: 1px solid white;
+            background-image: linear-gradient(to right, green, yellow, red);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+        }
+        #progress-fill{
+            position: absolute;
+            height: 100%;
+            width: 50%;
+            right: 0;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <ul class="header-ul">
+            <li><a href="/">MADHAV</a></li>
+            <li><a href="analyze.html">ANALYZE</a></li>
+            <li><a href="music.html">MUSIC</a></li>
+            <li><a href="news.html">NEWS</a></li>
+            <li><a href="game.html">GAME</a></li>
+            <li><a href="about.html">ABOUT US</a></li>
+        </ul>
+    </header>
+    <main style="flex-grow:1">
+        <article>
+            <div style="margin:auto; max-width: 600px;">
+                <label for="input-label">Describe your day, yourself, feelings, events, etc.</label>
+                <textarea id="input-field" rows="8"></textarea>
+                <button type="button" id="submit-btn">Analyze</button>
+            </div>
+            <div class="progress-bar">
+                <div id="progress-fill"></div>
+            </div>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus illum repellendus quidem, facilis illo excepturi rerum tenetur adipisci sit quia blanditiis eius ipsam magnam necessitatibus. Obcaecati at vitae debitis molestiae?</p>
+        </article>
+    </main>
+</body>
+<script src="jquery-3.7.1.min.js"></script>
+<script>
+    $(document).ready(function(){
+    })
+</script>
+</html>
