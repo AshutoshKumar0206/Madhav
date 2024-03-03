@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 #Used in Tensorflow Model
@@ -22,6 +22,9 @@ import json
 import pickle
 import warnings
 warnings.filterwarnings("ignore")
+
+app = Flask(__name__)
+CORS(app)
 
 
 
@@ -186,7 +189,7 @@ model = tflearn.DNN(net, tensorboard_dir='tflearn_logs')
 
 
 print("Training the Model.......")
-model.fit(train_x, train_y, n_epoch=400, batch_size=8, show_metric=True)
+model.fit(train_x, train_y, n_epoch=1000, batch_size=8, show_metric=True)
 print("Saving the Model.......")
 model.save('model.tflearn')
 
@@ -253,6 +256,7 @@ def classify(sentence):
 
 def response(sentence, userID='123', show_details=False):
     results = classify(sentence)
+    print (results)
     # That Means if Classification is Done then Find the Matching Tag.
     if results:
         # Long Loop to get the Result.
@@ -261,28 +265,28 @@ def response(sentence, userID='123', show_details=False):
                 # Tag Finding
                 if i['tag'] == results[0][0]:
                     # Random Response from High Order Probabilities
-                    return print(random.choice(i['responses']))
+                    return random.choice(i['responses'])
 
     else:
-        print('Your current Search is under progress , by the time try some another search')
-
-
-
-app = Flask(__name__)
-CORS(app)
+        return "Your current Search is under progress , by the time try some another search"
 
 @app.route('/process_commute', methods=['POST'])
 def process_transcript():
     transcript = request.form['transcript']
-    response = response(transcript)
-    return response
+    print("Transcript: ",transcript)
+    response_text = response(transcript)
+    print("Response: ",response_text)
+    return response_text
 
 if __name__ == '__main__':
     app.run(debug=True,use_reloader=False)
 
 
-
-
+while True:
+    user_input = input("Enter something: ")
+    user_response = response(user_input)
+    print(user_response)
+    
 
 
 

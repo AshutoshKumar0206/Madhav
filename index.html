@@ -222,7 +222,7 @@
     $(document).ready(function(){
 
         function listening(callback) {
-            var recognition = new webkitSpeechRecognition() || new SpeechRecognition();;
+            var recognition = new webkitSpeechRecognition() || new SpeechRecognition()
             recognition.lang = "en-US";
             recognition.interimResults = false;
             recognition.maxAlternatives = 1;
@@ -232,6 +232,7 @@
             recognition.onresult = function(event) {
                 $("#mic-button").removeClass("listening");
                 var transcript = event.results[0][0].transcript;
+                console.log("-u: "+transcript);
                 callback(transcript);
             }
 
@@ -242,6 +243,7 @@
         }
 
         function speak(text) {
+            console.log("-mv: "+text)
             $("#lip").addClass("talking");
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = "en-US";
@@ -313,7 +315,7 @@
 
                 }else{
                     $.post({
-                        url: "http://localhost:5000/process_transcript",
+                        url: "http://localhost:5000/process_commute",
                         data: {transcript: transcript},
                         dataType: "text"
                     }).done(function(response) {

@@ -49,17 +49,23 @@
             height:50px;
             max-width: 600px;
             border: 1px solid white;
-            background-image: linear-gradient(to right, green, yellow, red);
+            background-image: linear-gradient(to right, red, yellow, green);
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+            transition: transform 1s;
+            cursor: pointer;
+        }
+        .progress-bar:hover{
+            transform: scale(1.1);
         }
         #progress-fill{
             position: absolute;
             height: 100%;
-            width: 50%;
+            width: 100%;
             right: 0;
             background-color: white;
+            transition: width 1s;
         }
     </style>
 </head>
@@ -84,13 +90,26 @@
             <div class="progress-bar">
                 <div id="progress-fill"></div>
             </div>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus illum repellendus quidem, facilis illo excepturi rerum tenetur adipisci sit quia blanditiis eius ipsam magnam necessitatibus. Obcaecati at vitae debitis molestiae?</p>
+            <p id="response"></p>
         </article>
     </main>
 </body>
 <script src="jquery-3.7.1.min.js"></script>
 <script>
     $(document).ready(function(){
+        $("#submit-btn").click(function(e){
+            response = $("#input-field").val();
+            $.post({
+                url: "http://localhost:5000/process_commute2",
+                data: {response: response},
+                dataType: "text"
+            }).done(function(response){
+                response = JSON.parse(response)
+                progress = (response[0]/180)*100
+                $("#progress-fill").css("width", progress+"%")
+                $("#response").html(response[1])
+            });
+        })
     })
 </script>
 </html>
