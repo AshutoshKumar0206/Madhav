@@ -88,7 +88,7 @@ model.add(Dense(units=128, activation="relu"))
 model.add(Dense(units=len(one_hot_labels[0]), activation="softmax"))
 
 model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
-model.fit(xtrain, ytrain, epochs=10, batch_size=52, validation_data=(xtest, ytest))
+model.fit(xtrain, ytrain, epochs=10, batch_size=60, validation_data=(xtest, ytest))
 
 
 
@@ -128,15 +128,6 @@ def classify_emotion(input_text, model, tokenizer, max_length):
     predicted_emotion = emotion_labels[np.argmax(prediction)]
 
     return predicted_emotion
-
-# Get user input
-user_input = input("Enter a sentence to predict the associated emotion: ")
-
-# Set the maximum sequence length
-#max_length = 100  # Replace with the actual max length
-
-# Call the function to classify the user's input
-predicted_emotion = classify_emotion(user_input, model, tokenizer, max_length)
 
 # Assuming predicted_emotion contains the predicted emotion# Replace with the actual predicted emotion
 
