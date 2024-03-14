@@ -13,7 +13,7 @@ import pandas as pd
 import numpy as np
 import keras
 import tensorflow
-from keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
@@ -81,8 +81,7 @@ xtrain, xtest, ytrain, ytest = train_test_split(padded_sequences, one_hot_labels
 
 
 model = Sequential()
-model.add(Embedding(input_dim=len(tokenizer.word_index) + 1, 
-                    output_dim=128, input_length=max_length))
+model.add(Embedding(input_dim=len(tokenizer.word_index) + 1, output_dim=128))
 model.add(Flatten())
 model.add(Dense(units=128, activation="relu"))
 model.add(Dense(units=len(one_hot_labels[0]), activation="softmax"))
