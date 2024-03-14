@@ -5,4 +5,4 @@ An AI Voice Assistant for Depression Tracking and Relief: Insights were taken fr
 About The Team:
 1. Ashish Kumar - Natural Language Processing and Datasets Training
 2. Aryayan Roy - Web Dev and Graphics UI
-3. Ashutosh - Web Dev and Game
+3. Ashutosh Kumar- Web Dev and Game
