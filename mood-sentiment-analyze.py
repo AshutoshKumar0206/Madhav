@@ -82,7 +82,7 @@ xtrain, xtest, ytrain, ytest = train_test_split(padded_sequences, one_hot_labels
 
 model = Sequential()
 model.add(Embedding(input_dim=len(tokenizer.word_index) + 1, 
-                    output_dim=128, input_length=max_length))
+                    output_dim=128))
 model.add(Flatten())
 model.add(Dense(units=128, activation="relu"))
 model.add(Dense(units=len(one_hot_labels[0]), activation="softmax"))
