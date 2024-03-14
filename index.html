@@ -187,10 +187,20 @@
             overflow-x: hidden;
             text-wrap: nowrap;
         }
+    .header-ul{
+        display:none;
+    }
+        header{
+            background-image: url(../../white_lines.png);
+           background-repeat:no-repeat;
+           margin-left: auto;
+           margin-right:50px;
+           cursor:pointer;
+        }
     </style>
 </head>
 <body>
-    <header>
+    <header onclick="toggleMenu()">
         <ul class="header-ul">
             <li><a href="/">MADHAV</a></li>
             <li><a href="analyze.html">ANALYZE</a></li>
@@ -219,6 +229,17 @@
 </body>
 <script src="jquery-3.7.1.min.js"></script>
 <script>
+document.querySelector("header").addEventListener("click", function() {
+    var headerUl = document.querySelector(".header-ul");
+    var head = document.querySelector("header"); 
+    if (headerUl.style.display === "none") {
+        headerUl.style.display = "flex";
+      
+      head.style.backgroundImage = "none";
+    } else {
+        headerUl.style.display = "none";
+    }
+});
     $(document).ready(function(){
 
         function listening(callback) {

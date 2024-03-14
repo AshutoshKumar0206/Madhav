@@ -90,6 +90,16 @@
         .auth::before{
             content: "~";
         }
+        .header-ul{
+        display:none;
+        }
+        header{
+            background-image: url(../../white_lines.png);
+           background-repeat:no-repeat;
+           margin-left: auto;
+           margin-right:50px;
+           cursor:pointer;
+        }
     </style>
 </head>
 <body>
@@ -125,6 +135,17 @@
 </body>
 <script src="jquery-3.7.1.min.js"></script>
 <script>
+        document.querySelector("header").addEventListener("click", function() {
+    var headerUl = document.querySelector(".header-ul");
+    var head = document.querySelector("header"); 
+    if (headerUl.style.display === "none") {
+        headerUl.style.display = "flex";
+      
+      head.style.backgroundImage = "none";
+    } else {
+        headerUl.style.display = "none";
+    }
+});
     $(document).ready(function(){
         var url = "https://newsapi.org/v2/everything?q=depression&apiKey=7fa5cddcf74d45e0826c93ac4b5009d8";
         $.get(url, function(data){

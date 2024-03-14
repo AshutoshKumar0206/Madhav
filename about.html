@@ -26,6 +26,16 @@
             margin-top: 1.5em;
             font-style: italic;
         }
+        .header-ul{
+        display:none;
+        }
+        header{
+            background-image: url(../../white_lines.png);
+           background-repeat:no-repeat;
+           margin-left: auto;
+           margin-right:50px;
+           cursor:pointer;
+        }
         .sudarshan-img{
             display: block;
             z-index: -1;
@@ -75,7 +85,7 @@
             <ul class="credits-ul">
                 <li>ARTIFICIAL INTELLIGENCE | MACHINE LEARNING</li>
                 <li>ASHISH KUMAR</li>
-                <li>APIs | FRONT-END | GRAPHICS</li>
+                <li>APIs | FRONT-END | GRAPHICS | BACKEND</li>
                 <li>ARYAYAN ROY</li>
                 <li>BACKEND | GAME | FRONT-END</li>
                 <li>ASHUTOSH KUMAR</li>
@@ -84,4 +94,17 @@
         <img src="sudarshan.webp" alt="Sudarshan Chakra" class="sudarshan-img">
     </main>
 </body>
+<script>
+    document.querySelector("header").addEventListener("click", function() {
+    var headerUl = document.querySelector(".header-ul");
+    var head = document.querySelector("header"); 
+    if (headerUl.style.display === "none") {
+        headerUl.style.display = "flex";
+      
+      head.style.backgroundImage = "none";
+    } else {
+        headerUl.style.display = "none";
+    }
+});
+</script>
 </html>
