@@ -3,7 +3,7 @@
         {
             "tag": "greeting",
             "patterns": ["Hey Madhav", "Hi", "Is anyone there?", "Hello"],
-            "responses": ["Welcome my friend , I know what you are here for.Just dedicate all your senses to me.Empty youself to me and talk freely.I am always with you"]
+            "responses": ["Welcome my friend , I know what you are here for. Just dedicate all your senses to me. Empty youself to me and talk freely. I am always with you"]
         },
         {
             "tag": "overcoming_despair",
