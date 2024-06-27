@@ -8,12 +8,15 @@ Maadhav Voice Assistant is an AI-powered assistant built using Natural Language 
 
 ## Features
 1. AI Avatar (Madhav AI): Madhav AI features an AI-powered avatar capable of engaging in voice conversations with users. This interactive feature provides a supportive environment for users to express their feelings, thoughts, and concerns.
+<img src="./images/Madhav.png">
 
 2. Mood Sentiment Analysis: The platform includes a depression tracker tool designed to help users monitor their mood patterns and track changes in their mental health over time. By logging daily experiences and emotions, users can gain valuable insights into their depressive episodes and progress.
+<img src="./images/MoodAnalysis.png">
 
 3. Depression News Live: Madhav AI aggregates real-time news and updates related to depression from reputable sources. Users can stay informed about the latest developments in depression research, treatment options, and community initiatives, fostering a sense of awareness and empowerment.
 
 4. Depression Relief Game: To promote relaxation and emotional well-being, Madhav AI offers a variety of interactive games specifically designed to alleviate depressive symptoms. These games serve as engaging distractions and stress-relievers, helping users unwind and find moments of joy amidst their struggles.
+<img src="./images/DepressionReliefGame.png">
 
 
 ## Dependencies
